@@ -1,0 +1,21 @@
+name: Run Unit Tests
+
+run-name: ${{ github.actor }} is running the unit tests 🚀
+
+on: [push]
+
+jobs:
+  run-catch2-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build tests target
+        run: cmake -S . -B build
+      - name: Run tests
+        run: cmake --build build --target tests
+      - name: Run tests
+        run: ./build/tests/tests
+      
+      - run: echo "🍏 The return status of the test suite is ${{ job.status }}." 
+      
